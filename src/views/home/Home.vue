@@ -24,10 +24,11 @@ import NavBar from "components/common/navbar/NavBar"
 import TabControl from 'components/content/tabControl/TabControl'
 import GoodsList from 'components/content/goods/GoodsList'
 import Scroll from 'components/common/scroll/Scroll'
-import BackTop from 'components/content/backTop/BackTop'
+// import BackTop from 'components/content/backTop/BackTop'
 // 额外组件
 import { getHomeMultidata, getHomeGoods } from 'network/homeReq'
-import { debounce } from 'common/utils'
+// import { debounce } from 'common/utils'
+import  { itemListListenerMixin, backTopMixin } from 'common/mixin'
 // import Swiper from 'components/common/swiper/Swiper'
 // import SwiperItem from 'components/common/swiper/SwiperItem'
 
@@ -45,16 +46,17 @@ export default {
       },
       // 获取的当前页面数据
       currentType: 'pop',
-      // 控制返回顶部的显示与隐藏
-      isShowBackTop: false,
+      // // 控制返回顶部的显示与隐藏
+      // isShowBackTop: false,
       // tabControl 距顶部距离
       tabOffsetTop: 0,
-      // tabControl 吸顶状态
+      // // tabControl 吸顶状态
       isTabFixed: false,
       // 保存位置信息
       saveY: 0
     }
   },
+  mixins: [itemListListenerMixin, backTopMixin],
   components: {
     NavBar,
     HomeSwiper,
@@ -63,7 +65,7 @@ export default {
     TabControl,
     GoodsList,
     Scroll,
-    BackTop
+    // BackTop
   },
   created () {
     // 1. 请求多个数据
@@ -74,18 +76,19 @@ export default {
     this.getHomeGoods('new'),
     this.getHomeGoods('sell')
   },
-  mounted () {
-    // 3. 监听item 图片加载完成
-    const refresh = debounce(this.$refs.scrollRef.refresh, 50)
-    this.$bus.$on('ItemImageLoad', () => {
-      // 调用频繁 进行防抖操作
-      // 防抖函数起作用的过程
-        // 1. 如果直接执行refresh 那么refresh 函数会被执行30次
-        // 2. 可以将refresh 函数传入到debounce 函数中,生成一个新函数
-      refresh()
-      // this.$refs.scrollRef && this.$refs.scrollRef.refresh()
-    })
-  },
+  // mounted () {
+  //   // 3. 监听item 图片加载完成
+  //   const refresh = debounce(this.$refs.scrollRef.refresh, 50)
+  //   this.itemImgListener = () => {
+  //     // 调用频繁 进行防抖操作
+  //     // 防抖函数起作用的过程
+  //     // 1. 如果直接执行refresh 那么refresh 函数会被执行30次
+  //     // 2. 可以将refresh 函数传入到debounce 函数中,生成一个新函数
+  //     refresh()
+  //     // this.$refs.scrollRef && this.$refs.scrollRef.refresh()
+  //   }
+  //   this.$bus.$on('itemImageLoad', this.itemImgListener)
+  // },
   destroyed() {
     // Home 页面离开 禁止销毁 使用keep-alive
     console.log('home destroyed')
@@ -100,6 +103,8 @@ export default {
     // 离开时保存位置信息
     this.saveY = this.$refs.scrollRef.getScrollY()
     // console.log(this.saveY)
+    // 取消全局事件监听
+    this.$bus.$off('itemImageLoad', this.itemImgListener)
   },
   computed: {
     // 返回该类型数据
@@ -169,12 +174,13 @@ export default {
       this.$refs.tabControl1.currentIndex = index
       this.$refs.tabControl2.currentIndex = index
     },
-    // 返回顶部
-    backClick () {
-      this.$refs.scrollRef && this.$refs.scrollRef.scrollTo(0, 0)
-    },
-    // 监听轮播图加载完成,并获取tabControl 的offsetTop 的值
+    // // 返回顶部
+    // backClick () {
+    //   this.$refs.scrollRef && this.$refs.scrollRef.scrollTo(0, 0)
+    // },
+    //监听轮播图加载完成,并获取tabControl 的offsetTop 的值
     swiperImageLoad () {
+      this.$refs.scrollRef.refresh()
       // 获取tabControl 距顶部距离 在mounted的时候 不包含图片 获取的值不准确
       this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
       // console.log(this.tabOffsetTop)
