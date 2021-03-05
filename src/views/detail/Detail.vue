@@ -2,9 +2,6 @@
   <div id="detail">
     <detail-nav-bar ref="navBarRef" class="detail-nav" @titleClick="titleClick"/>
     <scroll class="content" ref="scrollRef" @scroll="contentScroll" :probe-type="3">
-      <ul v-for="item in $store.state.cartList">
-        <li>{{item}}</li>
-      </ul>
       <detail-swiper :top-images="topImages" @detailImageLoad="detailImageLoad"/>
       <detail-base-info :goods="goods"/>
       <detail-shop-info :shop="shop" />
@@ -16,6 +13,7 @@
     <detail-bottom-bar @addCart="addCart"/>
     <!--  修饰.native  需要监听组件的原生事件  -->
     <back-top @click.native="backClick" v-show="isShowBackTop"/>
+<!--    <toast :message="message" :isShow="isShow"></toast>-->
   </div>
 </template>
 
@@ -31,6 +29,7 @@ import DetailBottomBar from './childComps/DetailBottomBar'
 
 import Scroll from 'components/common/scroll/Scroll'
 import GoodsList from 'components/content/goods/GoodsList'
+// import Toast from 'components/common/toast/Toast'
 // import BackTop from 'components/content/backTop/BackTop'
 
 import { getDetail, Goods, Shop, GoodsParam, getRecommend } from 'network/detail'
@@ -53,7 +52,9 @@ export default {
       detailTopY: [],
       getThemeTopY: '',
       tabControlY: '',
-      currentIndex: 0
+      currentIndex: 0,
+      // message: '',
+      // isShow: false
     }
   },
   created () {
@@ -102,7 +103,8 @@ export default {
     DetailCommentInfo,
     GoodsList,
     // BackTop,
-    DetailBottomBar
+    DetailBottomBar,
+    // Toast
   },
   methods: {
     // 获取详情页数据
@@ -199,7 +201,16 @@ export default {
       product.iid = this.iid
       // 将商品添加购物车
       // this.$store.commit('addCart', product)
-      this.$store.dispatch('addCart', product)
+      this.$store.dispatch('addCart', product).then(res => {
+        this.$toast.dialog(res, 1500)
+        // this.isShow = true
+        // this.message = res
+        // setTimeout(() => {
+        //   this.isShow = false
+        //   this.message = ''
+        // }, 1500)
+      })
+      // 添加到购物车成功
     }
   }
 }
