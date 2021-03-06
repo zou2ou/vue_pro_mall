@@ -3,20 +3,20 @@
     <div class="bar-item bar-left">
       <div>
         <i class="icon service"></i>
-        <span class="text">客服</span>
+        <span  @click='handleService' class="text">客服</span>
       </div>
       <div>
         <i class="icon shop"></i>
-        <span class="text">店铺</span>
+        <span class="text" @click="handleShop">店铺</span>
       </div>
       <div>
         <i class="icon select"></i>
-        <span class="text">收藏</span>
+        <span @click="handleSelect" class="text">收藏</span>
       </div>
     </div>
     <div class="bar-item bar-right">
       <div class="cart" @click="addToCart">加入购物车</div>
-      <div class="buy">购买</div>
+      <div @click="handleBuy" class="buy">购买</div>
     </div>
   </div>
 </template>
@@ -26,6 +26,18 @@ export default {
   methods: {
     addToCart () {
       this.$emit('addCart')
+    },
+    handleService () {
+      this.$toast.dialog('该功能正在开发中!', 1500)
+    },
+    handleShop () {
+      this.$toast.dialog('该功能正在开发中!', 1500)
+    },
+    handleSelect () {
+      this.$toast.dialog('该功能正在开发中!', 1500)
+    },
+    handleBuy () {
+      this.$toast.dialog('该功能正在开发中!', 1500)
     }
   }
 }

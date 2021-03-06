@@ -28,18 +28,27 @@ export default {
   },
   deleteGoods (state) {
     if (state.cartList != null) {
-      let temp = state.cartList.filter(item => {
+      state.temp = state.cartList.filter(item => {
         if(item.checked === true) {
             return item
         }
       })
-      temp.forEach(item1 => {
+      state.temp.forEach(item1 => {
         state.cartList.forEach((item2, index) => {
-          if (item1.iid == item2.iid) {
+          if (item1.iid === item2.iid) {
             state.cartList.splice(index, 1)
           }
         })
       })
+      // state.cartList.filter(item =>{
+      //   if (item.checked === true) {
+      //     state.cartList.forEach((item2, index) => {
+      //       if (item.iid === item2.iid) {
+      //         state.cartList.splice(index, 1)
+      //       }
+      //     })
+      //   }
+      // })
       localStorage.setItem('cartList', JSON.stringify(state.cartList))
     }
   },

@@ -73,6 +73,8 @@ export default {
     calcClick () {
       if(!this.isSelectAll) {
         this.$toast.dialog('请选择需要购买的商品!', 1500)
+      }else {
+        this.$toast.dialog('该功能正在开发中!', 1500)
       }
     }
   }

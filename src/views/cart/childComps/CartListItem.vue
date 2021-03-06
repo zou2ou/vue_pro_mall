@@ -159,11 +159,6 @@ export default {
             item.count = 99
             this.$toast.dialog('最多购买99件!', 1500)
           }
-          if (item.count > 1) {
-            this.disable = false
-          }else {
-            this.disable = true
-          }
         }
       })
       localStorage.setItem('cartList', JSON.stringify(this.cartList))
