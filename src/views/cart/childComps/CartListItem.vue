@@ -141,6 +141,7 @@ export default {
     deleteLine (id){
       this.$store.commit('deleteGoodsItem', id)
       this.deleteSlider = "transform:translateX(0px) ; transition: .3s"
+
     },
     add (id) {
       this.$store.commit('increment', id)
@@ -181,6 +182,7 @@ export default {
     padding: 5px;
     z-index: 10;
     border-bottom: 1px solid #ccc;
+    touch-action: none;
   }
 
   .item-selector {

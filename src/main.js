@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import VueLazyLoad from 'vue-lazyload'
 
 import toast from 'components/common/toast'
 
@@ -16,6 +17,10 @@ Vue.use(toast)
 
 // 解决移动端300ms 延迟
 FastClick.attach(document.body)
+
+Vue.use(VueLazyLoad, {
+  loading: require('./assets/img/common/adog.jpg')
+})
 
 new Vue({
   render: h => h(App),

@@ -28,12 +28,18 @@ export default {
   },
   deleteGoods (state) {
     if (state.cartList != null) {
-      state.temp = state.cartList.filter(item => {
+      let temp = state.cartList.filter(item => {
         if(item.checked === true) {
-          return item
+            return item
         }
       })
-      state.cartList.splice(state.temp, state.temp.length)
+      temp.forEach(item1 => {
+        state.cartList.forEach((item2, index) => {
+          if (item1.iid == item2.iid) {
+            state.cartList.splice(index, 1)
+          }
+        })
+      })
       localStorage.setItem('cartList', JSON.stringify(state.cartList))
     }
   },

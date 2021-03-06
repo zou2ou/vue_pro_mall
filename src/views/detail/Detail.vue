@@ -222,6 +222,7 @@ export default {
     background-color: #fff;
     z-index: 9;
     height: 100vh;
+    touch-action: none;
   }
   .detail-nav {
     position: relative;

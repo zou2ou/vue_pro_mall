@@ -193,6 +193,7 @@ export default {
    /*padding-top: 44px;*/
    height: 100vh;
    position: relative;
+   touch-action: none;
  }
  .home-nav {
    background-color: var(--color-tint);

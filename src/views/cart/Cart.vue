@@ -40,6 +40,7 @@ export default {
 <style scoped>
   .cart {
     height: 100vh;
+    touch-action: none;
   }
   .nar-bar {
     background-color: var(--color-high-text);
