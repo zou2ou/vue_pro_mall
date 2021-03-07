@@ -27,7 +27,7 @@ export default {
     localStorage.setItem('cartList', JSON.stringify(state.cartList))
   },
   deleteGoods (state) {
-    if (state.cartList != null) {
+    if (state.cartList != []) {
       state.temp = state.cartList.filter(item => {
         if(item.checked === true) {
             return item

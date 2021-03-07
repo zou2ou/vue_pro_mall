@@ -1,7 +1,7 @@
 export default {
   cartLength (state) {
     state.cartList = localStorage.getItem('cartList')
-    if (state.cartList !== null) {
+    if (state.cartList != []) {
       state.cartList = JSON.parse(state.cartList)
       return state.cartList.length
     } else {
@@ -12,7 +12,7 @@ export default {
     return state.cartList
   },
   totalPrice (state) {
-    if (state.cartList !== null) {
+    if (state.cartList != []) {
       return '￥' + state.cartList.filter(item => {
         if (item.checked === true)  {
           return item
@@ -23,7 +23,7 @@ export default {
     }
   },
   checkedLength (state) {
-    if (state.cartList !== null) {
+    if (state.cartList != []) {
       return state.cartList.filter(item => {
         if (item.checked === true)  {
           return item
