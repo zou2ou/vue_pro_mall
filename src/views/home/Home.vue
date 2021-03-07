@@ -182,7 +182,6 @@ export default {
       this.$refs.scrollRef.refresh()
       // 获取tabControl 距顶部距离 在mounted的时候 不包含图片 获取的值不准确
       this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
-      // console.log(this.tabOffsetTop)
     }
   }
 }

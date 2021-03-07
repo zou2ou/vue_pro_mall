@@ -51,6 +51,7 @@ export default {
   overflow: hidden;
   width: 100px;
   box-sizing: border-box;
+  touch-action: none;
 }
 
 .menu-list-item {
