@@ -32,6 +32,7 @@ import {POP, SELL, NEW} from 'common/const'
 import {itemListListenerMixin, backTopMixin } from 'common/mixin'
 
 export default {
+  name: 'Category',
   components: {
     NavBar,
     TabMenu,
@@ -51,6 +52,7 @@ export default {
       tabOffsetTop: 0,
       // // tabControl 吸顶状态
       isTabFixed: false,
+      saveY: 0
     }
   },
   created() {
@@ -59,6 +61,18 @@ export default {
   },
   beforeUpdate () {
     this.tabOffsetTop = this.$refs.tabControl2.$el.offsetTop
+  },
+  activated() {
+    // 进来时讲位置设置原来保存的位置信息
+    this.$refs.scrollRef.scrollTo(0, this.saveY, 0)
+    this.$refs.scrollRef.refresh()
+  },
+  deactivated() {
+    // 离开时保存位置信息
+    this.saveY = this.$refs.scrollRef.getScrollY()
+    // console.log(this.saveY)
+    // 取消全局事件监听
+    this.$bus.$off('itemImageLoad', this.itemImgListener)
   },
   computed: {
     showSubcategory() {
@@ -74,7 +88,6 @@ export default {
     _getCategory() {
       getCategory().then(res => {
         // 1.获取分类数据
-
         this.categories = res.data.category.list
         // 2.初始化每个类别的子数据
         for (let i = 0; i < this.categories.length; i++) {

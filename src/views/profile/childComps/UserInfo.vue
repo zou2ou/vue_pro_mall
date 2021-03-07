@@ -8,7 +8,7 @@
       </slot>
       <div class="login-info left">
         <slot name="user-nickname">
-          <div>登录/注册</div>
+          <div @click="login">登录/注册</div>
         </slot>
         <div class="phone">
           <span>
@@ -24,6 +24,11 @@
 
 <script>
 export default {
+  methods: {
+    login () {
+      this.$toast.dialog('功能正在开发中!', 1500)
+    }
+  }
 }
 </script>
 
