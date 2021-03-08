@@ -66,5 +66,6 @@ export default {
   .grid-view {
     display: flex;
     flex-wrap: wrap;
+    touch-action: none;
   }
 </style>

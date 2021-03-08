@@ -20,7 +20,7 @@ export default {
   },
   deleteGoodsItem (state, id) {
     state.cartList.forEach((item,index) => {
-      if(item.iid == id) {
+      if(item.iid === id) {
         state.cartList.splice(index, 1)
       }
     })
@@ -54,7 +54,7 @@ export default {
   },
   increment (state, id) {
     state.cartList.forEach(item => {
-      if(item.iid == id) {
+      if(item.iid === id) {
         item.count++
         if (item.count > 99 ) {
           item.count = 99
@@ -66,7 +66,7 @@ export default {
   },
   decrement (state, id) {
     state.cartList.forEach(item => {
-      if(item.iid == id) {
+      if(item.iid === id) {
         item.count--
       }
     })

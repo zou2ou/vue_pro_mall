@@ -21,7 +21,11 @@ import CartBottomBar from './childComps/CartBottomBar'
 
 import { mapGetters } from 'vuex'
 export default {
-  name: 'Cart',
+  data () {
+    return {
+      cartList: []
+    }
+  },
   components: {
     NavBar,
     CartList,
@@ -31,8 +35,13 @@ export default {
   computed: {
    ...mapGetters(['cartLength'])
   },
+  created () {
+    if(JSON.parse(localStorage.getItem('cartList')) == null) {
+      localStorage.setItem('cartList', JSON.stringify(this.cartList))
+    }
+  },
   activated() {
-    this.$refs.scrollRef.refresh()
+    this.$refs.scrollRef && this.$refs.scrollRef.refresh()
   }
 }
 </script>

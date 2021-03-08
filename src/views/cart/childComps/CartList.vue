@@ -33,6 +33,7 @@ export default {
   .cart-list-item {
     position: absolute;
     z-index: 15;
+    touch-action: none;
   }
   .delete {
     height: 100%;

@@ -3,7 +3,7 @@ export default {
     state.cartList = localStorage.getItem('cartList')
     if (state.cartList != []) {
       state.cartList = JSON.parse(state.cartList)
-      return state.cartList.length
+      return state.cartList && state.cartList.length
     } else {
       return 0
     }

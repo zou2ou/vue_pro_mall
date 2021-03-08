@@ -89,6 +89,7 @@ export default {
     position: relative;
     line-height: 40px;
     font-size: 14px;
+    touch-action: none;
   }
   .check-content {
     display: flex;
